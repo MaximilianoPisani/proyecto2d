@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     public float longitudRaycast = 0.1f;
     public LayerMask capasuelo;
-    private bool enSuelo;
+    private bool enSuelo; // hola profe no pude modificar al ingles estas variables por que si las cambio me modifican todo, pero el resto esta en ingles
     private Vector2 standingColliderSize = new Vector2(1f, 2f);
     private Vector2 layingDownColliderSize = new Vector2(1f, 1f);
     private Vector2 standingColliderOffset = new Vector2(0f, 0.5f);
