@@ -6,7 +6,6 @@ public class Health : MonoBehaviour
 {
     public int maxHealth = 3;
     private int _currentHealth;
-
     public StartPosition startPosition;
     private Animator _animator; 
 

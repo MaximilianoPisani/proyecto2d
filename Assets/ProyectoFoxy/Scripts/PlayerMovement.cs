@@ -13,10 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float longitudRaycast = 0.1f;
     public LayerMask capasuelo;
     private bool enSuelo;
-
     private Vector2 standingColliderSize = new Vector2(1f, 2f);
     private Vector2 layingDownColliderSize = new Vector2(1f, 1f);
-
     private Vector2 standingColliderOffset = new Vector2(0f, 0.5f);
     private Vector2 layingDownColliderOffset = new Vector2(0f, 0f);
 

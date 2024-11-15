@@ -4,29 +4,42 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
-    public static GameManager instance;
 
-    private int totalCoins = 0; // Contador de monedas
+    public static GameManager Instance;
 
-    private void Awake()
+    [SerializeField] private int _endScore;
+
+    public OnEndGame onEndGame;
+    public delegate void OnEndGame();
+
+    private int _score;
+
+    void Awake()
     {
-        // Asegura de que solo exista una instancia de GameManager
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Mantiene el GameManager entre escenas
+            Instance = this;
         }
         else
         {
-            Destroy(gameObject); // Si ya existe una instancia, destruye este objeto
+            Destroy(this);
         }
     }
 
-    // Método para agregar monedas al contador
-    public void AddCoins(int amount)
+    public void IncreaseScore(int amount)
     {
-        totalCoins += amount;
-        Debug.Log("Monedas totales: " + totalCoins);
+        _score += amount;
+        Debug.Log($"Current Score: {_score}");
+
+        if (_score >= _endScore)
+        {
+            EndGame();
+        }
+    }
+
+    public void EndGame()
+    {
+        Debug.Log($"Game Finished");
+        onEndGame?.Invoke();
     }
 }
