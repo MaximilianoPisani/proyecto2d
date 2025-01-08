@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    
+    public AudioClip pickupSound; 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      
+       
         if (collision.CompareTag("Player"))
         {
-            
-            Debug.Log("¡Collected coin!");
+           
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
 
-          
             Destroy(gameObject);
         }
     }

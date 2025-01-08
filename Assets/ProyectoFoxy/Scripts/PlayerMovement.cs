@@ -9,24 +9,24 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 10f;
     private Rigidbody2D _rb;
     public Animator animator;
-    private BoxCollider2D boxCollider;
+    private BoxCollider2D _boxCollider;
     public float longitudRaycast = 0.1f;
     public LayerMask capasuelo;
-    private bool enSuelo; // hola profe no pude modificar al ingles estas variables por que si las cambio me modifican todo, pero el resto esta en ingles
-    private Vector2 standingColliderSize = new Vector2(1f, 2f);
-    private Vector2 layingDownColliderSize = new Vector2(1f, 1f);
-    private Vector2 standingColliderOffset = new Vector2(0f, 0.5f);
-    private Vector2 layingDownColliderOffset = new Vector2(0f, 0f);
+    private bool _enSuelo; // hola profe no pude modificar al ingles estas variables por que si las cambio me modifican todo, pero el resto esta en ingles
+    private Vector2 _standingColliderSize = new Vector2(1f, 2f);
+    private Vector2 _layingDownColliderSize = new Vector2(1f, 1f);
+    private Vector2 _standingColliderOffset = new Vector2(0f, 0.5f);
+    private Vector2 _layingDownColliderOffset = new Vector2(0f, 0f);
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         if (_rb == null)
         {
             Debug.LogError("El Rigidbody2D es null!");
         }
-        if (boxCollider == null)
+        if (_boxCollider == null)
         {
             Debug.LogError("El BoxCollider2D es null!");
         }
@@ -60,18 +60,18 @@ public class PlayerMovement : MonoBehaviour
 
         // Detectar si está en el suelo usando Raycast
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, longitudRaycast, capasuelo);
-        enSuelo = hit.collider != null;
+        _enSuelo = hit.collider != null;
 
         // Priorizar la animación de salto
-        if (Input.GetKeyDown(KeyCode.Space) && enSuelo)
+        if (Input.GetKeyDown(KeyCode.Space) && _enSuelo)
         {
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("Jump"); // Activar animación de salto con prioridad
         }
 
         // Cambiar entre animación de caída o estar en el suelo
-        animator.SetBool("IsFalling", !enSuelo && _rb.velocity.y < 0);
-        animator.SetBool("ensuelo", enSuelo);
+        animator.SetBool("IsFalling", !_enSuelo && _rb.velocity.y < 0);
+        animator.SetBool("ensuelo", _enSuelo);
 
         // Tumbarse
         if (Input.GetKeyDown(KeyCode.S))
@@ -101,14 +101,14 @@ public class PlayerMovement : MonoBehaviour
 
     void AdjustColliderForLayingDown()
     {
-        boxCollider.size = layingDownColliderSize;
-        boxCollider.offset = layingDownColliderOffset;
+        _boxCollider.size = _layingDownColliderSize;
+        _boxCollider.offset = _layingDownColliderOffset;
     }
 
     void AdjustColliderForStanding()
     {
-        boxCollider.size = standingColliderSize;
-        boxCollider.offset = standingColliderOffset;
+        _boxCollider.size = _standingColliderSize;
+        _boxCollider.offset = _standingColliderOffset;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
