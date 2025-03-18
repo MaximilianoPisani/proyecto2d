@@ -8,31 +8,21 @@ public class StartPosition : MonoBehaviour
 
     private void Start()
     {
-        // Verifico si el Transform del jugador está asignado
         if (_playerTransform == null)
         {
             Debug.LogError("El Transform del jugador no está asignado en StartPosition.");
             return;
         }
 
-        // Reseteo la posición del jugador al iniciar
-        ResetPlayerPosition();
+        // Coloca al jugador en el último checkpoint guardado
+        _playerTransform.position = CheckpointManager.Instance.GetCheckpoint();
     }
 
     public void ResetPlayerPosition()
     {
-        // reseteo la posición si el Transform del jugador está asignado
-        if (_playerTransform != null)
-        {
-            _playerTransform.position = transform.position;
-        }
-        else
-        {
-            Debug.LogError("No se puede resetear la posición del jugador porque _playerTransform es null.");
-        }
+        _playerTransform.position = CheckpointManager.Instance.GetCheckpoint();
     }
 
-  
     public void SetPlayerTransform(Transform playerTransform)
     {
         _playerTransform = playerTransform;

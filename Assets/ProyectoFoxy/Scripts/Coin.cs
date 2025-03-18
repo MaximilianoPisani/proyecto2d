@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.ProyectoFoxy.Scripts.Data;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public AudioClip pickupSound; 
+    [SerializeField] private CoinData _coinData;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,7 +13,7 @@ public class Coin : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
            
-            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
+            AudioSource.PlayClipAtPoint(_coinData.PickSound, transform.position);
 
             Destroy(gameObject);
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemigo
   - IsFinalPickUp
+  - DeathZone
   layers:
   - Default
   - TransparentFX
